@@ -1,0 +1,35 @@
+<mat-card class="example-card" (click)="cardClicked()">
+    <owl-carousel [options]="carouselOptions"
+                  [carouselClasses]="carouselClasses"
+                  (click)="singleProduct(item.id)"
+    >
+
+        <div class="item">
+            <div class="thumbnail-image">
+                <img mat-card-image
+                     [src]=getPathImage(item.image)
+                     class="productImg"
+                     alt="image"
+                />
+            </div>
+        </div>
+    </owl-carousel>
+
+    <mat-card-content class="mat-content" (click)="singleProduct(item.id)">
+        <h3>{{item.price | currency: "VND"}}</h3>
+        <span>{{item.name }}</span>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-button mat-stroked-button
+                color="primary"
+                class="button"
+                (click)="addToCart(item.id)"
+        >
+            ADD TO CARD
+        </button>
+        <button mat-button>SHARE
+        </button>
+    </mat-card-actions>
+
+</mat-card>

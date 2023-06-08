@@ -1,0 +1,40 @@
+<app-slider></app-slider>
+<div *ngIf="data$ | async as data">
+    <div class="products-container">
+        <div class="title">
+            Sản phẩm mới
+            <button mat-button mat-raised-button color="primary" class="viewAllBtn"
+                    (click) = "viewAll()">
+                Xem tất cả
+            </button>
+        </div>
+        <div class="body">
+
+            <ng-container *ngFor="let item of data.listNewProduct">
+                <app-item-single [item]="item"></app-item-single>
+            </ng-container>
+
+        </div>
+    </div>
+
+    <div class="products-container">
+        <div class="title">
+            Sản phẩm bán chạy
+            <button mat-button mat-raised-button
+                    color="primary"
+                    class="viewAllBtn"
+                    (click) = "viewAll()">
+                Xem tất cả
+            </button>
+        </div>
+        <div class="body">
+
+            <ng-container *ngFor="let item of data.listBestSeller">
+                <app-item-single [item]="item"></app-item-single>
+            </ng-container>
+
+        </div>
+    </div>
+
+</div>
+<app-contact></app-contact>

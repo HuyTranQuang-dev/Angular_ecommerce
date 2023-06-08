@@ -1,0 +1,104 @@
+<h2 *ngIf="action === 'edit'" class="title-action">Sửa sản phẩm</h2>
+<h2 *ngIf="action === 'add'" class="title-action">Thêm mới sản phẩm</h2>
+<form [formGroup]="productForm" class="form-actions">
+    <div class="row">
+        <div class="col-4">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-select formControlName="categoryId" (selectionChange)="changeCategory($event)">
+                    <mat-option *ngIf="!product.categoryId" [value]="''">Chọn danh mục</mat-option>
+                    <mat-option *ngFor="let o of categories" [value]="o.id">
+                        {{o.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Tên</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+        </div>
+
+        <div class="col-4">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Giá</mat-label>
+                <input type="number" matInput formControlName="price">
+            </mat-form-field>
+        </div>
+
+        <div class="col-12">
+            <mat-label>Mô tả</mat-label>
+            <ck-editor formControlName="description"
+            ></ck-editor>
+        </div>
+
+        <div class="col-6">
+
+            <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+                <ngx-dropzone-label>
+                    <div>
+                        <h2 *ngIf="action === 'add'; else uploadFileForUpdate">Chọn hình ảnh</h2>
+                        <ng-template #uploadFileForUpdate>
+                            <h2>Thay đổi hình ảnh</h2>
+                        </ng-template>
+
+                    </div>
+                </ngx-dropzone-label>
+                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                            *ngFor="let f of files"
+                                            [file]="f"
+                                            [removable]="true"
+                                            (removed)="onRemove(f)"
+                >
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-image-preview>
+            </div>
+
+        </div>
+
+        <div class="col-6 mt-3 d-flex flex-column">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Ngày tạo</mat-label>
+                <input matInput [matDatepicker]="createDate" [value]="getCreateDate()" disabled>
+                <mat-datepicker-toggle matSuffix [for]="createDate"></mat-datepicker-toggle>
+                <mat-datepicker #createDate></mat-datepicker>
+            </mat-form-field>
+
+            <div *ngIf="action === 'edit'">
+                <mat-label>Ảnh: </mat-label>
+                <img [src]="pathImage"
+                     alt="image"
+                     style="width: 150px;height: 150px;object-fit: contain;"
+                >
+            </div>
+        </div>
+
+    </div>
+
+    <div class="btn-group row">
+        <button mat-button mat-raised-button color="primary"
+                class="save"
+                (click)="save()"
+                *ngIf="action === 'edit'"
+                [disabled]="!productForm.valid">
+            Lưu lại
+        </button>
+
+        <button mat-button mat-raised-button color="primary"
+                class="save"
+                (click)="save()"
+                *ngIf="action === 'add'"
+                [disabled]="!productForm.valid">
+            Thêm mới
+        </button>
+
+        <button mat-button mat-stroked-button color="primary" class="button"
+                (click)="closeDialog()">
+            Hủy bỏ
+        </button>
+        <br><br><br>
+    </div>
+</form>
+
+

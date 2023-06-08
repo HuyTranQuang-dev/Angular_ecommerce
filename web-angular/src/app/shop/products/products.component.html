@@ -1,0 +1,48 @@
+<div class="products-container">
+    <div class="sidebar">
+        <div class="title">
+            <h2 class="title-category" (click)="getAllProductsOnPage()">Danh mục</h2>
+        </div>
+        <div class="list">
+
+            <mat-list class="list-group">
+                <mat-list-item class="list-item-category"
+                               [ngClass]="categorySelected === 'all' ? 'bold' : ''"
+                               (click)="getAllProductsOnPage()"
+                >
+                    Tất cả
+                </mat-list-item>
+                <ng-container *ngFor="let category of getAllProductsResponse.categoryDTOList">
+
+                    <mat-list-item class="list-item-category"
+                                   [ngClass]="categorySelected === category.id + '' ? 'bold' : ''"
+                                   (click)="findProductByCategory(category.id)"
+                    >
+                        {{category.name}}
+                    </mat-list-item>
+
+                </ng-container>
+            </mat-list>
+        </div>
+        <br>
+    </div>
+    <div class="body">
+
+        <ng-container *ngFor="let item of getAllProductsResponse.productDTOList |
+                            paginate: { id: 'list-pagination',
+                                            itemsPerPage: pageSize,
+                                            currentPage: page,
+                                            totalItems: getAllProductsResponse.totalProduct }">
+            <app-item-single [item]="item"></app-item-single>
+        </ng-container>
+
+    </div>
+</div>
+<!-- Phân trang -->
+<pagination-controls *ngIf="paginationIsDisplay"
+                     class="my-pagination"
+                     id="list-pagination"
+                     previousLabel="Prev"
+                     nextLabel="Next"
+                     (pageChange)="handlePageChange($event)">
+</pagination-controls>

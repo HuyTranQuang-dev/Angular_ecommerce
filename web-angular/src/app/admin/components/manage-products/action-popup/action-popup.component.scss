@@ -1,0 +1,36 @@
+.form-actions {
+    height: 300px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-group {
+    display: block;
+    float: right;
+}
+
+.role-selecte {
+    display: inline-block;
+}
+
+.upload-image {
+    margin: 18px 0 0 -26px;
+}
+
+ngx-dropzone,
+.custom-dropzone {
+    margin: 20px 0;
+}
+
+.custom-dropzone {
+    height: 250px;
+    background: #333;
+    color: #fff;
+    border: 3px solid #cccccc;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.custom-dropzone.ngx-dz-hovered {
+    border: 5px solid rgb(235, 79, 79);
+}

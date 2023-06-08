@@ -1,0 +1,12 @@
+.example-card {
+  height: 505px;
+}
+
+.mat-content > span {
+  height: 40px;
+  overflow: hidden;
+  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;// giới hạn 2 dòng
+}

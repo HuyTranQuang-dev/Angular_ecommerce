@@ -1,0 +1,79 @@
+<!-- Đăng nhập -->
+<form [formGroup]="loginForm" *ngIf="!checkSignUp">
+    <div class="example-container">
+        <h2 style="font-weight: 100; text-align: center;">Đăng nhập</h2>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Tài khoản</mat-label>
+            <input matInput formControlName="username" placeholder="Nhập tài khoản" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Mật khẩu</mat-label>
+            <input matInput formControlName="password" type="password" required>
+        </mat-form-field>
+        <button mat-button mat-raised-button
+                color="primary"
+                class="buy-now-button space"
+                [disabled]="!loginForm.valid"
+                (click)="login()"
+        >
+            ĐĂNG NHẬP
+        </button>
+
+
+        <label style="text-align: center; margin-top: 5px; color:gray">Hoặc</label>
+        <button mat-button
+                mat-stroked-button
+                color="primary"
+                class="button"
+                (click)="goToSignUp()"
+        >
+            ĐĂNG KÝ NGAY
+        </button>
+    </div>
+</form>
+
+<!-- Đăng ký -->
+<form [formGroup]="signUpForm" *ngIf="checkSignUp">
+    <div class="example-container">
+        <h2 style="font-weight: 100; text-align: center;">Mẫu đăng ký</h2>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Tài khoản</mat-label>
+            <input matInput formControlName="username" placeholder="Nhập tài khoản" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Mật khẩu</mat-label>
+            <input matInput formControlName="password" type="password" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Họ và tên</mat-label>
+            <input matInput formControlName="fullname" placeholder="Nhập họ và tên" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Số điện thoại</mat-label>
+            <input matInput formControlName="phoneNumber" placeholder="Nhập số điện thoại" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Địa chỉ</mat-label>
+            <input matInput formControlName="address" placeholder="Nhập địa chỉ" required>
+        </mat-form-field>
+
+        <button mat-button mat-raised-button color="primary"
+                class="buy-now-button space"
+                [disabled]="!signUpForm.valid"
+                (click)="signUp()">
+            ĐĂNG KÝ
+        </button>
+
+        <label style="text-align: center; margin-top: 5px; color:gray">Hoặc</label>
+        <button mat-button mat-stroked-button color="primary" class="button"
+                (click)="goToLogin()">
+            QUAY LẠI ĐĂNG NHẬP
+        </button>
+    </div>
+</form>
