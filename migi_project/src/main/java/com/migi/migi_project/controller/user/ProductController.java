@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 @RestController
@@ -116,7 +117,7 @@ public class ProductController {
             newOrderDTO.setNameUser(userDTO.getUsername());
             //Convert Timestamp to string
             SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd");
-            String result = simpleDateFormat.format(userDTO.getCreateDate());
+            String result = simpleDateFormat.format(new Timestamp(System.currentTimeMillis()));
             newOrderDTO.setOrderDate(result);
             newOrderDTO.setStatus(0);
             newOrderDTO.setIdUser(idUser);
